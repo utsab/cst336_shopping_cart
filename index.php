@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,7 +40,11 @@
             </form>
             
             <!-- Display Search Results -->
-            
+            <?php
+                if (isset($_GET['query'])) {
+                    echo "Your query: " .  $_GET['query'] . "<br/>"; 
+                }
+            ?>
         </div>
     </div>
     </body>
