@@ -42,7 +42,10 @@
             <!-- Display Search Results -->
             <?php
                 if (isset($_GET['query'])) {
-                    echo "Your query: " .  $_GET['query'] . "<br/>"; 
+                    include 'wmapi.php'; 
+                    $items = getProducts($_GET['query']); 
+                    print_r($items); 
+                    
                 }
             ?>
         </div>
