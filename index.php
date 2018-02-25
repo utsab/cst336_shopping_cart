@@ -1,4 +1,8 @@
-
+<?php
+    session_start();
+    include 'functions.php'; 
+    
+?>
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +27,7 @@
                     </div>
                     <ul class='nav navbar-nav'>
                         <li><a href='index.php'>Home</a></li>
-                        <li><a href='scart.php'>Cart</a></li>
+                        <li><a href='scart.php'>Cart <?php displayCartCount(); ?></a></li>
                     </ul>
                 </div>
             </nav>
@@ -41,12 +45,48 @@
             
             <!-- Display Search Results -->
             <?php
+                
+                
+                
+                if (!isset($_SESSION['cart'])) {
+                    $_SESSION['cart'] = array();
+                }
+                
+                //Check to see if an item has been added to the cart
+                if (isset($_POST['itemName'])) {
+                    
+                    // Creating an array to hold an item's properties. 
+                    $newItem = array(); 
+                    $newItem['name'] = $_POST['itemName']; 
+                    $newItem['itemId'] = $_POST['itemId']; 
+                    $newItem['price'] = $_POST['itemPrice']; 
+                    $newItem['image'] = $_POST['itemImage']; 
+                    
+                    $found = false; 
+                    
+                    foreach ($_SESSION['cart'] as &$item) {
+                        if ($newItem['itemId'] == $item['itemId']) {
+                            $item['quantity'] += 1; 
+                            $found = true; 
+                        }
+                    }
+                    
+                    
+                    if (!$found) {
+                        $newItem['quantity'] = 1;
+                        array_push($_SESSION['cart'], $newItem); 
+                    }
+                    
+                    
+                } 
+    
                 if (isset($_GET['query'])) {
                     include 'wmapi.php'; 
                     $items = getProducts($_GET['query']); 
-                    print_r($items); 
-                    
                 }
+                
+                displayResults();  
+                    
             ?>
         </div>
     </div>
