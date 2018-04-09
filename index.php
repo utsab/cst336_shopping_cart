@@ -1,6 +1,7 @@
 <?php
     session_start();
     include 'functions.php'; 
+    include 'database.php'; 
     
 ?>
 
@@ -81,11 +82,14 @@
                 } 
     
                 if (isset($_GET['query'])) {
-                    include 'wmapi.php'; 
-                    $items = getProducts($_GET['query']); 
+                    //include 'wmapi.php'; 
+                    //$items = getProducts($_GET['query']); 
+                    
+                    getMatchingItems($_GET['query']);
                 }
                 
                 displayResults();  
+                
                     
             ?>
         </div>

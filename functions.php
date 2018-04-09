@@ -4,9 +4,7 @@ function displayResults() {
     global $items; 
     
     if (isset($items)) {
-       // echo "<table class='table'>"; 
         
-        //print_r($items); 
         
         foreach ($items as $item) {
             $itemName = $item['name']; 
@@ -74,6 +72,11 @@ function displayCart() {
 
 
 function displayCartCount() {
+    
+    if (!isset($_SESSION['cart'])) {
+         $_SESSION['cart'] = array();
+    }
+                
     $cartCount = 0; 
     
     foreach ($_SESSION['cart'] as $item) {
