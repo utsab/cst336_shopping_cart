@@ -96,6 +96,9 @@
                     
                 } 
     
+    
+                print_r($_GET); 
+                
                 if (isset($_GET["category"]) && !empty($_GET["category"])) {
                     $category = $_GET["category"]; 
                 }

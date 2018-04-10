@@ -36,7 +36,6 @@ function insertItemsIntoDB($items) {
     }
 }
 
-
 function getMatchingItems($query) {
     $db = getDatabaseConnection(); 
     
@@ -46,12 +45,36 @@ function getMatchingItems($query) {
     
     $statement->execute(); 
     
-    $records = $statement->fetchAll(); 
+    $items = $statement->fetchAll(); 
+    
+    return $items; 
+}
+
+
+
+function getCategoriesHTML() {
+    $db = getDatabaseConnection(); 
+    $categoriesHTML = "<option value=''></option>";  // User can opt to not select a category 
+    
+    $sql = "SELECT category_name FROM category"; 
+    
+    $statement = $db->prepare($sql); 
+    
+    $statement->execute(); 
+    
+    $records = $statement->fetchAll(PDO::FETCH_ASSOC); 
     
     foreach ($records as $record) {
-        echo $record["name"] . "<br/>"; 
+        $category = $record['category_name']; 
+        $categoriesHTML .= "<option value='$category'>$category</option>"; 
     }
+    
+    return $categoriesHTML; 
 }
+
+
+
+
 
 function addCategoriesForItems($itemStart, $itemEnd, $category_id) {
     $db = getDatabaseConnection(); 

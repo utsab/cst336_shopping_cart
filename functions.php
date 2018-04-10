@@ -8,9 +8,9 @@ function displayResults() {
         
         foreach ($items as $item) {
             $itemName = $item['name']; 
-            $itemPrice = $item['salePrice']; 
-            $itemImage = $item['thumbnailImage']; 
-            $itemId = $item['itemId']; 
+            $itemPrice = $item['price']; 
+            $itemImage = $item['image_url']; 
+            $itemId = $item['item_id']; 
             
             echo '<tr>'; 
             echo "<td><img src='$itemImage'/></td>"; 
